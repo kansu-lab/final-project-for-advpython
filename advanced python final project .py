@@ -381,7 +381,8 @@ def main(file):
     # without preprocessing
     from sklearn.feature_extraction.text import TfidfVectorizer
     from sklearn.preprocessing import LabelEncoder
-    tfidfvector = TfidfVectorizer()
+    tfidfvector=TfidfVectorizer("content", lowercase=True, analyzer="word", token_pattern="\S+", use_idf=True,
+                                     min_df=10)
     labelencoder = LabelEncoder()
     comments = facts['text'].tolist()
     label_list = facts['airline_sentiment'].tolist()

@@ -68,7 +68,7 @@ def main(file):
     cvec = CountVectorizer(lowercase=False,
                            ngram_range=(1, 2),
                            # vocabulary=whitelist,   # You can work with your own whitelist
-                           max_features=1000,  # Or work with the top 1000 most frequent items, or...
+                           max_features=5000,  # Or work with the top 1000 most frequent items, or...
                            token_pattern=u"(?u)\\b\\S+\\b",  # Use these settings if you want to keep punctuation
                            analyzer="word")
 
