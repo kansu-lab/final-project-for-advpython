@@ -373,7 +373,7 @@ def main(file):
     poly_X_test = poly.transform(test_X)
 
     # logistic regression evaluation
-    poly_lg_accuracy = logicsticregression_accuracy(train_X, train_y, test_X, test_y)
+    poly_lg_accuracy = logicsticregression_accuracy(poly_X_train, train_y, poly_X_test, test_y)
     print('accuracy for Logistic Regression with negation information and polynomial features : ', poly_lg_accuracy)
 
     # using the text feature only
@@ -419,7 +419,11 @@ def main(file):
     # Bag of words
     # no - preprocessing
     from sklearn.feature_extraction.text import CountVectorizer
-    vectorizer = CountVectorizer(max_features=5000)
+    vectorizer = CountVectorizer(lowercase=False,
+                           ngram_range=(1, 2),
+                           max_features=5000,
+                           token_pattern=u"(?u)\\b\\S+\\b",
+                           analyzer="word")
     X = vectorizer.fit_transform(comments)
     data = X.toarray()
 
