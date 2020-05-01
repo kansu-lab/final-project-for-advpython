@@ -14,7 +14,7 @@ from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import SGDClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-# import xgboost as xgb
+import xgboost as xgb
 from sklearn.ensemble import BaggingClassifier
 from sklearn.ensemble import VotingClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -139,12 +139,12 @@ def adaboost_accuracy(train_X, train_y, test_X, test_y):
     return accuracy
 
 
-# def XGBoost_accuarcy(train_X, train_y,test_X,test_y):
-#     xgb_model = xgb.XGBClassifier()
-#     xgb_model.fit(train_X, train_y)
-#     predict_xgb_model = xgb_model.predict(test_X)
-#     accuracy = accuracy_score(test_y, predict_xgb_model)
-#     return accuracy
+def XGBoost_accuarcy(train_X, train_y,test_X,test_y):
+    xgb_model = xgb.XGBClassifier()
+    xgb_model.fit(train_X, train_y)
+    predict_xgb_model = xgb_model.predict(test_X)
+    accuracy = accuracy_score(test_y, predict_xgb_model)
+    return accuracy
 
 
 # prepocessing
@@ -354,9 +354,9 @@ def main(file):
     ada_accuracy = adaboost_accuracy(train_X, train_y, test_X, test_y)
     print('accuracy for ada boost with negation information : ', ada_accuracy)
 
-    # # boosting-- xgboost
-    # xgb_accuracy=XGBoost_accuarcy(train_X, train_y,test_X,test_y)
-    # print('accuracy for XG boost with negation information : ', xgb_accuracy)
+    # boosting-- xgboost
+    xgb_accuracy=XGBoost_accuarcy(train_X, train_y,test_X,test_y)
+    print('accuracy for XG boost with negation information : ', xgb_accuracy)
 
     # try polynominal features
     from sklearn.preprocessing import PolynomialFeatures
