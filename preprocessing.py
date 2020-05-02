@@ -130,12 +130,22 @@ def main(file):
     from sklearn.ensemble import BaggingClassifier
     from sklearn.tree import DecisionTreeClassifier
     bag_clf = BaggingClassifier(
+        LogisticRegression(multi_class='auto', solver='lbfgs',max_iter=10000), n_estimators=100,
+        max_samples=int(np.ceil(0.6 * encoded.shape[0])),
+        bootstrap=False, n_jobs=3, random_state=42)
+    bag_clf.fit(encoded, train['label'])
+    pred_bag = bag_clf.predict(X_test)
+    print('classification report for pasting(Logistic regression):\n', classification_report(test["label"], pred_bag))
+
+    from sklearn.ensemble import BaggingClassifier
+    from sklearn.tree import DecisionTreeClassifier
+    bag_clf = BaggingClassifier(
         DecisionTreeClassifier(), n_estimators=100,
         max_samples=int(np.ceil(0.6 * encoded.shape[0])),
         bootstrap=False, n_jobs=3, random_state=42)
     bag_clf.fit(encoded, train['label'])
     pred_bag = bag_clf.predict(X_test)
-    print('classification report for pasting:\n', classification_report(test["label"], pred_bag))
+    print('classification report for pasting(Decision Tree Classifier):\n', classification_report(test["label"], pred_bag))
 
 
 if __name__ == "__main__":
